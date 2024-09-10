@@ -1,11 +1,13 @@
-import { get } from "mongoose";
+import Contact from "../models/contact.js";
+import ctrlWrapper from "../helpers/ctrlWrapper.js";
 
-const getContacts = async (req, res) => {
-  res.json({ message: "Get contacts" });
+const getAllContacts = async (req, res) => {
+  const contacts = await Contact.find({});
+  res.json(contacts);
 };
 
 const contactsController = {
-  getContacts,
+  getAllContacts: ctrlWrapper(getAllContacts),
 };
 
 export default contactsController;

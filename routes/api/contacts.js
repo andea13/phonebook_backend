@@ -6,6 +6,6 @@ import contactsController from "../../controllers/contacts.js";
 
 const contactsRouter = express.Router();
 
-contactsRouter.get("/", ctrlWrapper(contactsController.getContacts));
+contactsRouter.get("/", contactsController.getAllContacts);
 
 export default contactsRouter;
