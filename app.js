@@ -2,9 +2,11 @@ import express from "express";
 import cors from "cors";
 import contactsRouter from "./routes/api/contacts.js";
 import usersRouter from "./routes/api/users.js";
-import mongoose from "mongoose";
+import dotenv from "dotenv";
 
 export const app = express();
+
+dotenv.config();
 
 app.use(cors());
 app.use(express.json());
