@@ -1,4 +1,4 @@
-import HttpError from "../helpers";
+import HttpError from "../helpers/HttpError.js";
 
 const validateBody = (schema) => {
   const func = async (req, res, next) => {

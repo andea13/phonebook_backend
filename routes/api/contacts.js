@@ -1,11 +1,11 @@
 import express from "express";
-import HttpError from "../../helpers";
-import ctrl from "../../controllers/contacts";
-import validateBody from "../../middlewares";
-import schemas from "../../schemas";
+import ctrlWrapper from "../../helpers/ctrlWrapper.js";
+import validateBody from "../../middlewares/validateBody.js";
+import schemas from "../../schemas/index.js";
+import contactsController from "../../controllers/contacts.js";
 
 const contactsRouter = express.Router();
 
-router.get("/", validateBody(schemas.addContactSchema), ctrl.getContacts);
+contactsRouter.get("/", ctrlWrapper(contactsController.getContacts));
 
 export default contactsRouter;

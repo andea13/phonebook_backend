@@ -1,3 +1,3 @@
-import validateBody from "./validateBody";
+import validateBody from "./validateBody/validateBody.js";
 
 export default { validateBody };

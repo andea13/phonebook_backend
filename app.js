@@ -1,7 +1,8 @@
 import express from "express";
 import cors from "cors";
-import contactsRouter from "./routes/api/contacts";
-import usersRouter from "./routes/api/users";
+import contactsRouter from "./routes/api/contacts.js";
+import usersRouter from "./routes/api/users.js";
+import mongoose from "mongoose";
 
 export const app = express();
 

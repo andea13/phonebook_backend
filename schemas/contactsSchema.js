@@ -5,3 +5,5 @@ const addContactSchema = Joi.object({
   email: Joi.string().required(),
   phone: Joi.string().required(),
 });
+
+export default addContactSchema;
