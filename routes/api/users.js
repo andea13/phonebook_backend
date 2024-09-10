@@ -1,17 +1,18 @@
 import express from "express";
+import validateBody from "../../middlewares/validateBody.js";
+import schemas from "../../schemas/index.js";
+import usersController from "../../controllers/users.js";
 
 const usersRouter = express.Router();
 
-usersRouter.get("/", (req, res) => {
-  res.send("Hello Users!");
-});
+usersRouter.get("/", usersController.getAllUsers);
 
-usersRouter.get("/users", (req, res) => {
-  res.send("<h1>Users page</h1>");
-});
+// usersRouter.get("/users", (req, res) => {
+//   res.send("<h1>Users page</h1>");
+// });
 
-usersRouter.get("/users/:id", (req, res) => {
-  res.send(`<h1>User</h1> Параметр: ${req.params.id}`);
-});
+// usersRouter.get("/users/:id", (req, res) => {
+//   res.send(`<h1>User</h1> Параметр: ${req.params.id}`);
+// });
 
 export default usersRouter;
