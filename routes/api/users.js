@@ -1,6 +1,6 @@
 import express from "express";
 import validateBody from "../../middlewares/validateBody.js";
-import schemas from "../../schemas/index.js";
+import schemas from "../../models/user.js";
 import usersController from "../../controllers/users.js";
 
 const usersRouter = express.Router();

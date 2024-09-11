@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import Joi from "joi";
 
 const userSchema = new Schema({
   name: {
@@ -17,4 +18,12 @@ const userSchema = new Schema({
 
 const User = model("user", userSchema);
 
-export default User;
+const addUserSchema = Joi.object({
+  name: Joi.string().required(),
+  email: Joi.string().required(),
+  password: Joi.string().required(),
+});
+
+const schemas = { addUserSchema };
+
+export default { User, schemas };
