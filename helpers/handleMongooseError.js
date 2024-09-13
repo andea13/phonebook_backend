@@ -1,6 +1,9 @@
 const handleMongooseError = (error, data, next) => {
-  error.status = 400;
-  error.message = "Error creating contact";
+  const { name, code } = error;
+
+  const status = name === "MongoServerError" && code === 11000 ? 409 : 400;
+  error.status = status;
+
   next();
 };
 

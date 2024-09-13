@@ -1,29 +1,42 @@
 import { Schema, model } from "mongoose";
 import Joi from "joi";
+import handleMongooseError from "../helpers/handleMongooseError.js";
 
-const userSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-});
+const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-const User = model("user", userSchema);
+const userSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      match: emailRegex,
+      unique: true,
+      required: true,
+    },
+    password: {
+      type: String,
+      minlength: 6,
+      required: true,
+    },
+  },
+  { versionKey: false }
+);
 
-const addUserSchema = Joi.object({
+userSchema.post("save", handleMongooseError);
+export const User = model("user", userSchema);
+
+const signUpSchema = Joi.object({
   name: Joi.string().required(),
-  email: Joi.string().required(),
-  password: Joi.string().required(),
+  email: Joi.string().pattern(emailRegex).required(),
+  password: Joi.string().min(6).required(),
 });
 
-const schemas = { addUserSchema };
+const loginSchema = Joi.object({
+  email: Joi.string().pattern(emailRegex).required(),
+  password: Joi.string().min(6).required(),
+});
 
-export default { User, schemas };
+export const schemas = { signUpSchema, loginSchema };

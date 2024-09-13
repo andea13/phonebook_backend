@@ -8,7 +8,15 @@ export const app = express();
 
 dotenv.config();
 
-app.use(cors());
+const corsOptions = {
+  origin: "http://localhost:3000", // Replace with your frontend's actual origin
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+  allowedHeaders: ["Content-Type", "Authorization"], // Define allowed headers
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.json());
 
 app.use("/contacts", contactsRouter);

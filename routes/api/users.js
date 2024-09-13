@@ -1,18 +1,24 @@
 import express from "express";
+import isValidId from "../../middlewares/isValidId.js";
 import validateBody from "../../middlewares/validateBody.js";
-import schemas from "../../models/user.js";
-import usersController from "../../controllers/users.js";
+import { schemas } from "../../models/user.js";
+import authController from "../../controllers/auth.js";
+import authenticate from "../../middlewares/autenticate.js";
 
 const usersRouter = express.Router();
 
-usersRouter.get("/", usersController.getAllUsers);
+//signup
 
-// usersRouter.get("/users", (req, res) => {
-//   res.send("<h1>Users page</h1>");
-// });
+usersRouter.post(
+  "/signup",
+  validateBody(schemas.signUpSchema),
+  authController.signUp
+);
 
-// usersRouter.get("/users/:id", (req, res) => {
-//   res.send(`<h1>User</h1> Параметр: ${req.params.id}`);
-// });
+usersRouter.post(
+  "/login",
+  validateBody(schemas.loginSchema),
+  authController.login
+);
 
 export default usersRouter;
