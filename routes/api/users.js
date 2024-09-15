@@ -21,4 +21,8 @@ usersRouter.post(
   authController.login
 );
 
+usersRouter.post("/logout", authenticate, authController.logout);
+
+usersRouter.get("/current", authenticate, authController.getCurrentUser);
+
 export default usersRouter;

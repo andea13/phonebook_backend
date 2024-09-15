@@ -46,12 +46,30 @@ const login = async (req, res) => {
   };
 
   const token = jwt.sign(payload, SECRET_KEY, { expiresIn: EXPIRES_IN });
-  res.json({ token, user });
+  await User.findByIdAndUpdate(user._id, { token });
+
+  const userObject = user.toObject();
+  delete userObject.token;
+
+  res.json({ user: userObject, token });
+};
+
+const getCurrentUser = async (req, res) => {
+  const { email, name } = req.user;
+  res.json({ email, name });
+};
+
+const logout = async (req, res) => {
+  const { _id } = req.user;
+  await User.findByIdAndUpdate(_id, { token: "" });
+  res.status(204).send();
 };
 
 const authController = {
   signUp: ctrlWrapper(signUp),
   login: ctrlWrapper(login),
+  getCurrentUser: ctrlWrapper(getCurrentUser),
+  logout: ctrlWrapper(logout),
 };
 
 export default authController;

@@ -3,12 +3,17 @@ import ctrlWrapper from "../helpers/ctrlWrapper.js";
 import HttpError from "../helpers/HttpError.js";
 
 const getAllContacts = async (req, res) => {
-  const contacts = await Contact.find({});
+  const { _id: owner } = req.user;
+  const contacts = await Contact.find({ owner });
   res.json(contacts);
 };
 
 const addContact = async (req, res) => {
-  const result = await Contact.create(req.body);
+  console.log(req.user);
+  const { _id: owner } = req.user;
+  console.log(owner);
+  const result = await Contact.create({ ...req.body, owner });
+
   if (!result) {
     throw HttpError(400, "Error creating contact");
   }

@@ -8,8 +8,13 @@ const contactSchema = new Schema(
       type: String,
       required: true,
     },
-    phone: {
+    number: {
       type: String,
+      required: true,
+    },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
       required: true,
     },
   },
@@ -20,13 +25,13 @@ contactSchema.post("save", handleMongooseError);
 
 const addContactSchema = Joi.object({
   name: Joi.string().required(),
-  phone: Joi.string().required(),
+  number: Joi.string().required(),
 });
 
 const updateContactSchema = Joi.object({
   name: Joi.string(),
-  phone: Joi.string(),
-}).or("name", "phone");
+  number: Joi.string(),
+}).or("name", "number");
 
 export const schemas = { addContactSchema, updateContactSchema };
 
