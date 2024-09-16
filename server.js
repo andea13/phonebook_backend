@@ -6,7 +6,7 @@ const { DB_HOST, PORT = 3001 } = process.env;
 mongoose
   .connect(DB_HOST)
   .then(() =>
-    app.listen(PORT, () => {
+    app.listen(PORT || 3001, () => {
       console.log(`Example app listening on port ${PORT}!`);
     })
   )
