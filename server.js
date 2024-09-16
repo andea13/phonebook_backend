@@ -1,12 +1,13 @@
 import { app } from "./app.js";
 import mongoose from "mongoose";
 
-const { DB_HOST, PORT = 3001 } = process.env;
+const { DB_HOST } = process.env;
+const { PORT } = process.env || 4000;
 
 mongoose
   .connect(DB_HOST)
   .then(() =>
-    app.listen(PORT || 3001, () => {
+    app.listen(PORT, () => {
       console.log(`Example app listening on port ${PORT}!`);
     })
   )
