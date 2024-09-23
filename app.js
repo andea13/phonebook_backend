@@ -9,7 +9,7 @@ export const app = express();
 dotenv.config();
 
 const corsOptions = {
-  origin: "https://andea13.github.io/", // Replace with your frontend's actual origin
+  origin: "https://andea13.github.io/goit-react-hw-08-phonebook", // Replace with your frontend's actual origin
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true, // Allow credentials (cookies, authorization headers, etc.)
   allowedHeaders: ["Content-Type", "Authorization"], // Define allowed headers
